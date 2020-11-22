@@ -6,7 +6,7 @@
 /*   By: taegor <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/14 13:43:01 by taegor            #+#    #+#             */
-/*   Updated: 2020/11/21 16:39:59 by taegor           ###   ########.fr       */
+/*   Updated: 2020/11/22 17:22:46 by taegor           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ char				*ft_substr(const char *s, unsigned int start, size_t len)
 	if (!s)
 		return (0);
 	len_s = ft_findlen((char *)s);
+	if ((unsigned int)len_s - start < len)
+		len = len_s - start;
 	p = (char *)malloc(len + 1);
 	if (!p)
 		return (NULL);
