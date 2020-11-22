@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-int			ft_tens(int n)
+static int	ft_tens(int n)
 {
 	int		i;
 
@@ -25,7 +25,7 @@ int			ft_tens(int n)
 	return (i);
 }
 
-int			ft_sqrt(int num, int i)
+static int	ft_sqrt(int num, int i)
 {
 	while (i > 0)
 	{
