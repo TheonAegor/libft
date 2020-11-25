@@ -24,13 +24,11 @@ size_t		ft_strlcpy(char *dst, const char *src,
 	if (size == 0)
 		return (result_len);
 	i = 0;
-	while (size - 1 > 0 && result_len > 0)
+	while (size - 1 > i && src[i] != '\0')
 	{
 		dst[i] = src[i];
-		size--;
-		result_len--;
 		i++;
 	}
 	dst[i] = '\0';
-	return (result_len + i);
+	return (result_len);
 }
