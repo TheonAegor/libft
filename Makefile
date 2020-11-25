@@ -1,46 +1,35 @@
-NAME =	libft.a
+NAME = libft.a
 
-SRCS =	ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memccpy.c ft_memcmp.c ft_memchr.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c 
+FLAG = -Wall -Werror -Wextra
 
-OBJS	= $(SRCS:.c=.o)
+OPTION = -c -I ./
 
-BONUSS	= ft_lstadd_back.c  ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
+SRC := ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c ft_itoa.c ft_memccpy.c ft_memcmp.c ft_memchr.c ft_memcpy.c ft_memmove.c ft_memset.c ft_putchar.c ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_strjoin.c ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c 
 
+SRC_BONUS := ft_lstadd_back.c  ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
 
-BONUSO	= $(BONUSS:.c=.o)
+OBJ := $(addsuffix .o, $(basename $(notdir $(SRC))))
 
-CC		= gcc
+OBJ_BONUS := $(addsuffix .o, $(basename $(notdir $(SRC_BONUS))))
 
-RM		= rm -f
+$(NAME):
+		@gcc $(FLAG) $(OPTION) $(SRC)
+		@ar rc ${NAME} ${OBJ}
 
-FLAGS	= -Wall -Wextra -Werror
+%.o:	%.c
+	gcc @$(FLAG) $(OPTION) $< 
 
-%.c.o:
-		$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
-
-so:
-	$(CC) -fPIC $(FLAGS) $(SRCS)
-	gcc -shared -o libft.so $(OBJS)
-
-
-$(NAME): $(OBJS)
-		ar rcs $(NAME) $(OBJS)
-
-all:	$(NAME)
-
-bonus:	$(BONUSO)
-		ar rcs $(NAME) $(BONUSO)
-
-clean:
-		$(RM) $(OBJS) $(BONUSO)
+all:	${NAME}
+	
+clean: 
+		@rm -f ${OBJ} ${OBJ_BONUS}
 
 fclean: clean
-	$(RM) $(NAME)
+		@rm -f  ${NAME}
 
-re:		fclean all
+re: fclean all
 
-norm:
-	norminette -R CheckForbiddenSourceHeader
-
-.PHONY:
-		all, clean, fclean, re, bonus, norm
+bonus: $(BONUS)
+		ar rc $(NAME) $(OBJ_BONUS)
+		
+	
